@@ -1,0 +1,7 @@
+# Visual Studio files
+Sources/**/*.user
+Sources/**/*.suo
+
+# Visual Studio folders
+Sources/**/obj/
+Sources/**/bin/
