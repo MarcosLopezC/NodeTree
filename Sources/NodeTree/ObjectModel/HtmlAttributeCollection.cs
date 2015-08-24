@@ -4,7 +4,7 @@ using NodeTree.Serialization;
 
 namespace NodeTree.ObjectModel
 {
-	public class HtmlAttributes :
+	public class HtmlAttributeCollection :
 		IHtmlRenderable,
 		IEnumerable<KeyValuePair<string, string>>
 	{
@@ -30,29 +30,29 @@ namespace NodeTree.ObjectModel
 			}
 		}
 
-		public HtmlAttributes()
+		public HtmlAttributeCollection()
 		{
 			this.dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 		}
 
-		public HtmlAttributes Set(string name)
+		public HtmlAttributeCollection Set(string name)
 		{
 			return Set(name, null);
 		}
 
-		public HtmlAttributes Set(string name, string value)
+		public HtmlAttributeCollection Set(string name, string value)
 		{
 			this[name] = value;
 			return this;
 		}
 
-		public HtmlAttributes Remove(string name)
+		public HtmlAttributeCollection Remove(string name)
 		{
 			this.dictionary.Remove(name);
 			return this;
 		}
 
-		public HtmlAttributes Clear()
+		public HtmlAttributeCollection Clear()
 		{
 			this.dictionary.Clear();
 			return this;

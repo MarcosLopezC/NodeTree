@@ -4,9 +4,9 @@ using NodeTree.Serialization;
 
 namespace NodeTree.ObjectModel
 {
-	public class HtmlNodeList : IHtmlRenderable, IEnumerable<HtmlNode>
+	public class HtmlNodeList : IHtmlRenderable, IEnumerable<IHtmlNode>
 	{
-		private List<HtmlNode> nodes;
+		private List<IHtmlNode> nodes;
 
 		public int Count
 		{
@@ -16,7 +16,7 @@ namespace NodeTree.ObjectModel
 			}
 		}
 
-		public HtmlNode this[int index]
+		public IHtmlNode this[int index]
 		{
 			get
 			{
@@ -30,16 +30,16 @@ namespace NodeTree.ObjectModel
 
 		public HtmlNodeList()
 		{
-			this.nodes = new List<HtmlNode>();
+			this.nodes = new List<IHtmlNode>();
 		}
 
-		public HtmlNodeList Add(HtmlNode node)
+		public HtmlNodeList Add(IHtmlNode node)
 		{
 			this.nodes.Add(node);
 			return this;
 		}
 
-		public HtmlNodeList Add(HtmlNode node, int index)
+		public HtmlNodeList Add(IHtmlNode node, int index)
 		{
 			this.nodes.Insert(index, node);
 			return this;
@@ -51,17 +51,17 @@ namespace NodeTree.ObjectModel
 			return this;
 		}
 
-		public bool Contains(HtmlNode node)
+		public bool Contains(IHtmlNode node)
 		{
 			return this.nodes.Contains(node);
 		}
 
-		public int IndexOf(HtmlNode node)
+		public int IndexOf(IHtmlNode node)
 		{
 			return this.nodes.IndexOf(node);
 		}
 
-		public HtmlNodeList Remove(HtmlNode node)
+		public HtmlNodeList Remove(IHtmlNode node)
 		{
 			this.nodes.Remove(node);
 			return this;
@@ -78,7 +78,7 @@ namespace NodeTree.ObjectModel
 			throw new NotImplementedException();
 		}
 
-		public IEnumerator<HtmlNode> GetEnumerator()
+		public IEnumerator<IHtmlNode> GetEnumerator()
 		{
 			throw new NotImplementedException();
 		}
