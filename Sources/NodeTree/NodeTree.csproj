@@ -39,8 +39,8 @@
     <Compile Include="ObjectModel\HtmlNodeList.cs" />
     <Compile Include="ObjectModel\HtmlNodeType.cs" />
     <Compile Include="ObjectModel\HtmlNode.cs" />
-    <Compile Include="IHtmlRenderable.cs" />
-    <Compile Include="IHtmlWriter.cs" />
+    <Compile Include="Serialization\IHtmlRenderable.cs" />
+    <Compile Include="Serialization\IHtmlWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

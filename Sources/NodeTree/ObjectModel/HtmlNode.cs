@@ -1,4 +1,5 @@
 ﻿using System;
+using NodeTree.Serialization;
 
 namespace NodeTree.ObjectModel
 {
@@ -6,9 +7,6 @@ namespace NodeTree.ObjectModel
 	{
 		public HtmlNodeType NodeType { get; private set; }
 
-		public void Render(IHtmlWriter writer)
-		{
-
-		}
+		public void Render(IHtmlWriter writer);
 	}
 }

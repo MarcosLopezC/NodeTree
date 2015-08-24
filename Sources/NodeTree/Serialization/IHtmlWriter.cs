@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NodeTree
+namespace NodeTree.Serialization
 {
 	public interface IHtmlWriter
 	{
