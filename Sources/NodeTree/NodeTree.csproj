@@ -35,10 +35,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ObjectModel\IHtmlNode.cs" />
-    <Compile Include="ObjectModel\HtmlAttributeCollection.cs" />
-    <Compile Include="ObjectModel\HtmlElement.cs" />
-    <Compile Include="ObjectModel\HtmlNodeList.cs" />
+    <Compile Include="ObjectModel\HtmlNode.cs" />
     <Compile Include="ObjectModel\HtmlNodeType.cs" />
     <Compile Include="Serialization\IHtmlRenderable.cs" />
     <Compile Include="Serialization\IHtmlWriter.cs" />
