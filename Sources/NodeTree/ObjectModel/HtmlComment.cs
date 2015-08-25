@@ -4,7 +4,7 @@ using NodeTree.Serialization;
 
 namespace NodeTree.ObjectModel
 {
-	public class HtmlNodeList : IHtmlRenderable, IEnumerable<IHtmlRenderable>
+	public class HtmlComment : IHtmlRenderable
 	{
 
 	}
