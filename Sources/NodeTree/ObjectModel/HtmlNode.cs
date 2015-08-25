@@ -6,56 +6,42 @@ namespace NodeTree.ObjectModel
 {
 	public abstract class HtmlNode : IHtmlRenderable, IEnumerable<HtmlNode>
 	{
-		HtmlNode Parent { get; private set; }
+		public HtmlNodeType NoteType { get; protected set; }
 
-		HtmlNodeType NoteType { get; protected set; }
+		public abstract HtmlNodeList ChildNodes { get; set; }
 
-		HtmlNode this[int index] { get; }
+		public abstract HtmlAttributeCollection Attributes { get; set; }
 
-		bool HasChildNodes { get; }
+		public virtual HtmlNode AddChild(HtmlNode node)
+		{
+			if (this.ChildNodes != null)
+			{
+				this.ChildNodes.Add(node);
+			}
+			return this;
+		}
 
-		bool IsVoidElement { get; }
+		public virtual HtmlNode AddChild(HtmlNode node, int index)
+		{
+			if (this.ChildNodes != null)
+			{
+				this.ChildNodes.Add(node, index);
+			}
+			return this;
+		}
 
-		string GetTagName();
+		public abstract void Render(IHtmlWriter writer);
 
-		HtmlNode SetTagName(string tag);
+		public IEnumerator<HtmlNode> GetEnumerator()
+		{
+			return (this.ChildNodes == null)
+				? System.Linq.Enumerable.Empty<HtmlNode>().GetEnumerator()
+				: this.ChildNodes.GetEnumerator();
+		}
 
-		string GetText();
-
-		HtmlNode SetText(string text);
-
-		string GetAttribute(string name);
-
-		bool HasAttribute(string name);
-
-		HtmlNode SetAttribute(string name, string value);
-
-		HtmlNode AddClassName(string className);
-
-		HtmlNode HasClassName(string className);
-
-		HtmlNode RemoveClassName(string className);
-
-		HtmlNode AddCssStyle(string propertyName, string value);
-
-		HtmlNode HasCssStyle(string propertyName);
-
-		HtmlNode RemoveCssStyle(string propertyName);
-
-		HtmlNode Prepend(HtmlNode node);
-
-		HtmlNode PrependTo(HtmlNode node);
-
-		HtmlNode Append(HtmlNode node);
-
-		HtmlNode AppendTo(HtmlNode node);
-
-		HtmlNode ReplaceWith(HtmlNode node);
-
-		HtmlNode Detach();
-
-		HtmlNode Clone();
-
-		HtmlNode Normalize();
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator();
+		}
 	}
 }
