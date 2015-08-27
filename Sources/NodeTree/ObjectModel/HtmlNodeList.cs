@@ -67,14 +67,17 @@ namespace NodeTree.ObjectModel
 			return this.nodes.Remove(node);
 		}
 
-		public void Render(IHtmlWriter writer)
+		public void Render(HtmlWriter writer)
 		{
-			throw new NotImplementedException();
+			foreach (var node in this.nodes)
+			{
+				node.Render(writer);
+			}
 		}
 
 		public IEnumerator<IHtmlRenderable> GetEnumerator()
 		{
-			throw new NotImplementedException();
+			return this.nodes.GetEnumerator();
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()

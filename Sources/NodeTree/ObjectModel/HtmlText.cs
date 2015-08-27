@@ -6,7 +6,7 @@ namespace NodeTree.ObjectModel
 {
 	public class HtmlText : IHtmlRenderable
 	{
-		public void Render(IHtmlWriter writer)
+		public void Render(HtmlWriter writer)
 		{
 			throw new NotImplementedException();
 		}

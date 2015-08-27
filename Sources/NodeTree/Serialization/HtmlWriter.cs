@@ -4,12 +4,12 @@ using System.Text;
 
 namespace NodeTree.Serialization
 {
-	public class HtmlWriter : IHtmlWriter
+	public class HtmlWriter
 	{
 		protected StringBuilder stringBuilder;
 
 		public HtmlWriter()
-			: this(new StringBuilder()) { }
+			: this(new StringBuilder(8192)) { }
 
 		public HtmlWriter(StringBuilder stringBuilder)
 		{

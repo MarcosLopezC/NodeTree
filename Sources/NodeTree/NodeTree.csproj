@@ -37,12 +37,11 @@
   <ItemGroup>
     <Compile Include="ObjectModel\HtmlAttributeCollection.cs" />
     <Compile Include="ObjectModel\HtmlComment.cs" />
-    <Compile Include="ObjectModel\HtmlElement.cs" />
+    <Compile Include="ObjectModel\HtmlTag.cs" />
     <Compile Include="ObjectModel\HtmlNodeList.cs" />
     <Compile Include="ObjectModel\HtmlText.cs" />
     <Compile Include="Serialization\HtmlWriter.cs" />
     <Compile Include="Serialization\IHtmlRenderable.cs" />
-    <Compile Include="Serialization\IHtmlWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NodeTree.Serialization;
 
 namespace NodeTree.ObjectModel
@@ -36,6 +37,23 @@ namespace NodeTree.ObjectModel
 			this.attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 		}
 
+		public void AppendClassName(string className)
+		{
+			if (string.IsNullOrEmpty(this["class"]))
+			{
+				this["class"] = className;
+			}
+			else
+			{
+				this["class"] += " " + className;
+			}
+		}
+
+		public void AppendStyle(string propertyName, string value)
+		{
+			this["style"] += string.Format("{0}:{1};", propertyName, value);
+		}
+
 		public bool Contains(string name)
 		{
 			return this.attributes.ContainsKey(name);
@@ -51,9 +69,17 @@ namespace NodeTree.ObjectModel
 			this.attributes.Clear();
 		}
 
-		public void Render(IHtmlWriter writer)
+		public void Render(HtmlWriter writer)
 		{
-			throw new NotImplementedException();
+			if (this.attributes.Count > 0)
+			{
+				writer.Write(" ");
+
+				foreach (var attribute in this.attributes)
+				{
+					writer.WriteAttribute(attribute.Key, attribute.Value);
+				}
+			}
 		}
 
 		public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
