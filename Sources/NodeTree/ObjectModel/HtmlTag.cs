@@ -20,6 +20,45 @@ namespace NodeTree.ObjectModel
 			this.ChildNodes = new HtmlNodeList();
 		}
 
+		public HtmlTag(string tagName) : this()
+		{
+			this.TagName = tagName;
+		}
+
+		public HtmlTag SetAttribute(string name, string value)
+		{
+			this.Attributes[name] = value;
+			return this;
+		}
+
+		public HtmlTag RemoveAttribute(string name)
+		{
+			this.Attributes.Remove(name);
+			return this;
+		}
+
+		public HtmlTag SetSelfClosing(bool isSelfClosing)
+		{
+			this.IsSelfClosing = isSelfClosing;
+			return this;
+		}
+
+		public HtmlTag Prepend(IHtmlRenderable node)
+		{
+			throw new NotImplementedException();
+		}
+
+		public HtmlTag Append(IHtmlRenderable node)
+		{
+			this.ChildNodes.Add(node);
+			return this;
+		}
+
+		public HtmlTag SetText(string text)
+		{
+			throw new NotImplementedException();
+		}
+
 		public void Render(HtmlWriter writer)
 		{
 			writer.WriteOpeningTag(this.TagName);
@@ -40,6 +79,15 @@ namespace NodeTree.ObjectModel
 				writer.WriteClosingTag(this.TagName);
 				writer.WriteLine();
 			}
+		}
+
+		public override string ToString()
+		{
+			var writer = new HtmlWriter();
+
+			this.Render(writer);
+
+			return writer.ToString();
 		}
 	}
 }

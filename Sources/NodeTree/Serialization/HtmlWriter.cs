@@ -6,6 +6,9 @@ namespace NodeTree.Serialization
 {
 	public class HtmlWriter
 	{
+		[ThreadStatic]
+		private static StringBuilder encodedStringBuilder = new StringBuilder(4096);
+
 		protected StringBuilder stringBuilder;
 
 		public HtmlWriter()
@@ -94,7 +97,10 @@ namespace NodeTree.Serialization
 
 		public static string EncodeText(string text)
 		{
-			return new StringBuilder(text)
+			encodedStringBuilder.Length = 0;
+
+			return encodedStringBuilder
+				.Append(text)
 				.Replace("&",  "&amp;")
 				.Replace("<",  "&lt;")
 				.Replace(">",  "&gt;")

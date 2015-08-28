@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NodeTree.Serialization;
@@ -71,14 +72,9 @@ namespace NodeTree.ObjectModel
 
 		public void Render(HtmlWriter writer)
 		{
-			if (this.attributes.Count > 0)
+			foreach (var attribute in this.attributes)
 			{
-				writer.Write(" ");
-
-				foreach (var attribute in this.attributes)
-				{
-					writer.WriteAttribute(attribute.Key, attribute.Value);
-				}
+				writer.WriteAttribute(attribute.Key, attribute.Value);
 			}
 		}
 
@@ -87,7 +83,7 @@ namespace NodeTree.ObjectModel
 			return this.attributes.GetEnumerator();
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return this.GetEnumerator();
 		}
