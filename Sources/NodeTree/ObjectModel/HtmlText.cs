@@ -22,10 +22,5 @@ namespace NodeTree.ObjectModel
 		{
 			return this.Text;
 		}
-
-		public static implicit operator HtmlText(string text)
-		{
-			return new HtmlText(text);
-		}
 	}
 }
