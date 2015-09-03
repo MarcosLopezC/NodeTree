@@ -106,7 +106,7 @@ namespace NodeTree.Serialization
 				.Replace(">",  "&gt;")
 				.Replace("\"", "&quot;")
 				.Replace("'",  "&#x27;")
-				.Replace("/",  "&#x2F")
+				.Replace("/",  "&#x2F;")
 				.ToString();
 		}
 

@@ -45,7 +45,13 @@ namespace NodeTree.ObjectModel
 
 		public HtmlTag Prepend(IHtmlRenderable node)
 		{
-			throw new NotImplementedException();
+			this.ChildNodes.Add(node, 0);
+			return this;
+		}
+
+		public HtmlTag PrependText(string text)
+		{
+			return Prepend(new HtmlText(text));
 		}
 
 		public HtmlTag Append(IHtmlRenderable node)
@@ -54,9 +60,21 @@ namespace NodeTree.ObjectModel
 			return this;
 		}
 
-		public HtmlTag SetText(string text)
+		public HtmlTag AppendText(string text)
 		{
-			throw new NotImplementedException();
+			return Append(new HtmlText(text));
+		}
+
+		public HtmlTag AppendStyle(string name, string value)
+		{
+			this.Attributes.AppendStyle(name, value);
+			return this;
+		}
+
+		public HtmlTag AppendClass(string name)
+		{
+			this.Attributes.AppendClassName(name);
+			return this;
 		}
 
 		public void Render(HtmlWriter writer)
@@ -88,6 +106,11 @@ namespace NodeTree.ObjectModel
 			this.Render(writer);
 
 			return writer.ToString();
+		}
+
+		public static HtmlTag Create(string tagName)
+		{
+			return new HtmlTag(tagName);
 		}
 	}
 }

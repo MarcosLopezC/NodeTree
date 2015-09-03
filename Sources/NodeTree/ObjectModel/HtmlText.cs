@@ -15,7 +15,7 @@ namespace NodeTree.ObjectModel
 
 		public void Render(HtmlWriter writer)
 		{
-			writer.WriteEncoded(this.Text);
+			writer.WriteLineEncoded(this.Text);
 		}
 
 		public override string ToString()

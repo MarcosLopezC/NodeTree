@@ -44,6 +44,11 @@ namespace NodeTree.ObjectModel
 			this.nodes.Add(node);
 		}
 
+		public void Add(IHtmlRenderable node, int index)
+		{
+			this.nodes.Insert(index, node);
+		}
+
 		public void Clear()
 		{
 			this.nodes.Clear();
