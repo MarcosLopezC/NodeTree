@@ -6,13 +6,10 @@ namespace NodeTree.Serialization
 {
 	public class HtmlWriter
 	{
-		[ThreadStatic]
-		private static StringBuilder encodedStringBuilder = new StringBuilder(4096);
-
 		protected StringBuilder stringBuilder;
 
 		public HtmlWriter()
-			: this(new StringBuilder(8192)) { }
+			: this(new StringBuilder()) { }
 
 		public HtmlWriter(StringBuilder stringBuilder)
 		{
@@ -24,6 +21,11 @@ namespace NodeTree.Serialization
 			this.stringBuilder = stringBuilder;
 		}
 
+		public void Write(char character)
+		{
+			this.stringBuilder.Append(character);
+		}
+
 		public void Write(string text)
 		{
 			if (text != null)
@@ -32,9 +34,62 @@ namespace NodeTree.Serialization
 			}
 		}
 
+		public void WriteEncoded(char character)
+		{
+			switch (character)
+			{
+				case '&':  Write("&amp;");   break;
+				case '<':  Write("&lt;");    break;
+				case '>':  Write("&gt;");    break;
+				case '"':  Write("&quot;");  break;
+				case '\'': Write("&#x27;");  break;
+
+				default:   Write(character); break;
+			}
+		}
+
 		public void WriteEncoded(string text)
 		{
-			Write(EncodeText(text));
+			for (var i = 0; i < text.Length; i += 1)
+			{
+				WriteEncoded(text[i]);
+			}
+		}
+
+		public void WriteEncodedTrimSpaces(string text)
+		{
+			var start = 0;
+
+			// Skip any leading spaces.
+			while (start < text.Length && text[start] == ' ')
+			{
+				start += 1;
+			}
+
+			var end = text.Length - 1;
+
+			// Skip any trailing spaces.
+			while (end > start && text[end] == ' ')
+			{
+				end -= 1;
+			}
+
+			for (var i = start; i <= end; i += 1)
+			{
+				if (text[i] == ' ')
+				{
+					while (i < end && text[i + 1] == ' ')
+					{
+						i += 1;
+					}
+
+					Write(' ');
+				}
+				else
+				{
+					Write(text[i]);
+				}
+			}
 		}
 
 		public void WriteLine()
@@ -50,7 +105,14 @@ namespace NodeTree.Serialization
 
 		public void WriteLineEncoded(string text)
 		{
-			WriteLine(EncodeText(text));
+			WriteEncoded(text);
+			WriteLine();
+		}
+
+		public void WriteLineEncodedTrimSpaces(string text)
+		{
+			WriteEncodedTrimSpaces(text);
+			WriteLine();
 		}
 
 		public void WriteOpeningTag(string tagName)
@@ -81,7 +143,7 @@ namespace NodeTree.Serialization
 			Write(" ");
 			Write(name);
 			Write("=\"");
-			Write(EncodeText(value));
+			WriteEncodedTrimSpaces(value);
 			Write("\"");
 		}
 
@@ -93,21 +155,6 @@ namespace NodeTree.Serialization
 		public override string ToString()
 		{
 			return this.stringBuilder.ToString();
-		}
-
-		public static string EncodeText(string text)
-		{
-			encodedStringBuilder.Length = 0;
-
-			return encodedStringBuilder
-				.Append(text)
-				.Replace("&",  "&amp;")
-				.Replace("<",  "&lt;")
-				.Replace(">",  "&gt;")
-				.Replace("\"", "&quot;")
-				.Replace("'",  "&#x27;")
-				.Replace("/",  "&#x2F;")
-				.ToString();
 		}
 
 		protected struct TagData

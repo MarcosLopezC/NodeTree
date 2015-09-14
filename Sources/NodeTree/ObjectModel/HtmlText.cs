@@ -15,7 +15,7 @@ namespace NodeTree.ObjectModel
 
 		public void Render(HtmlWriter writer)
 		{
-			writer.WriteLineEncoded(this.Text);
+			writer.WriteLineEncodedTrimSpaces(this.Text);
 		}
 
 		public override string ToString()
