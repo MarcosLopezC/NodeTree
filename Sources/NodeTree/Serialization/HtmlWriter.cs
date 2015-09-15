@@ -156,23 +156,5 @@ namespace NodeTree.Serialization
 		{
 			return this.stringBuilder.ToString();
 		}
-
-		protected struct TagData
-		{
-			public string tagName;
-			public int indent;
-		}
-
-		protected struct HtmlAttribute
-		{
-			public string Name { get; private set; }
-			public string Value { get; private set; }
-
-			public HtmlAttribute(string name, string value) : this()
-			{
-				this.Name = name;
-				this.Value = value;
-			}
-		}
 	}
 }
